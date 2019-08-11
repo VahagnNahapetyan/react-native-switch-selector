@@ -7,8 +7,7 @@ import {
   PanResponder,
   Text,
   TouchableOpacity,
-  View,
-  Alert
+  View
 } from "react-native";
 
 const styles = {
@@ -107,22 +106,22 @@ export default class SwitchSelector extends Component {
   };
 
   toggleItem = (index, callOnPress = true) => {
-    
-    Alert.alert('test');
-    const { options, returnObject, onPress } = this.props;
+    const { options, returnObject, onPress, disableSwitch } = this.props;
     if (options.length <= 1 || index === null || isNaN(index)) return;
-    this.animate(
-      I18nManager.isRTL ? -(index / options.length) : index / options.length,
-      I18nManager.isRTL
-        ? -(this.state.selected / options.length)
-        : this.state.selected / options.length
-    );
+    if (!disableSwitch) {
+      this.animate(
+        I18nManager.isRTL ? -(index / options.length) : index / options.length,
+        I18nManager.isRTL
+          ? -(this.state.selected / options.length)
+          : this.state.selected / options.length
+      );
+      this.setState({ selected: index });
+    }
     if (callOnPress && onPress) {
       onPress(returnObject ? options[index] : options[index].value);
     } else {
       console.log("Call onPress with value: ", options[index].value);
     }
-    this.setState({ selected: index });
   };
 
   render() {
@@ -226,7 +225,7 @@ export default class SwitchSelector extends Component {
                             outputRange: [
                               hasPadding ? valuePadding : 0,
                               this.state.sliderWidth -
-                                (hasPadding ? valuePadding : 0)
+                              (hasPadding ? valuePadding : 0)
                             ]
                           })
                         }
