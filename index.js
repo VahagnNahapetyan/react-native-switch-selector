@@ -7,7 +7,8 @@ import {
   PanResponder,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Alert
 } from "react-native";
 
 const styles = {
@@ -140,6 +141,8 @@ export default class SwitchSelector extends Component {
       bold,
       disabled
     } = this.props;
+
+    Alert.alert('test');
 
     const options = this.props.options.map((element, index) => (
       <TouchableOpacity
