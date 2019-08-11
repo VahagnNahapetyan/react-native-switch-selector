@@ -107,6 +107,8 @@ export default class SwitchSelector extends Component {
   };
 
   toggleItem = (index, callOnPress = true) => {
+    
+    Alert.alert('test');
     const { options, returnObject, onPress } = this.props;
     if (options.length <= 1 || index === null || isNaN(index)) return;
     this.animate(
@@ -141,8 +143,6 @@ export default class SwitchSelector extends Component {
       bold,
       disabled
     } = this.props;
-
-    Alert.alert('test');
 
     const options = this.props.options.map((element, index) => (
       <TouchableOpacity
