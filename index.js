@@ -124,6 +124,14 @@ export default class SwitchSelector extends Component {
     }
   };
 
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedValue !== prevProps.selectedValue
+      && this.props.selectedValue 
+      && this.props.selectedValue !=  this.state.selected) {
+        this.toggleItem(this.props.selectedValue, false);
+    }
+  }
+
   render() {
     const {
       style,
